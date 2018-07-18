@@ -1,0 +1,81 @@
+.fadein {
+    -webkit-animation: fadein 5s forwards; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 5s forwards; /* Firefox < 16 */
+    animation: fadein 5s forwards;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.fadeout {
+    -webkit-animation: fadeout 2s forwards; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadeout 2s forwards; /* Firefox < 16 */
+    animation: fadeout 2s forwards;
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+.move-up {
+    -webkit-animation: move-up 2s ease forwards; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: move-up 2s ease forwards; /* Firefox < 16 */
+    animation: move-up 2s ease forwards;
+}
+
+@keyframes move-up {
+    from {
+        margin: -50px 0 0 -250px;
+    }
+    to {
+        margin: -125px 0 0 -250px;
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes move-up {
+    from {
+        margin: -50px 0 0 -250px;
+    }
+    to {
+        margin: -125px 0 0 -250px;
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes move-up {
+    from {
+        margin: -50px 0 0 -250px;
+    }
+
+    to {
+        margin: -125px 0 0 -250px;
+    }
+}
