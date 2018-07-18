@@ -11,7 +11,9 @@
 
     <script>
         function encrypt() {
-            alert(Encyptor.encrypt("hello, 12"));
+            let hexMessage = Encryptor.encrypt("goodbye", 2048);
+            let decrypted = Decryptor.decrypt(hexMessage);
+            console.log(decrypted);
         }
     </script>
 </body>

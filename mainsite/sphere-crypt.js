@@ -1,13 +1,15 @@
+var multiplier;
+
 function round(value, scale) {
     return (value).toPrecision(scale);
 }
 
 class SphereCryptor {
     static bounceMessage(message, p, v, difficulty) {
-        let multiplier = ByteUtilities.toByteArray(this.pointFunction(p.x, p.y, p.z));
+        multiplier = ByteUtilities.toByteArray(this.pointFunction(p.x, p.y, p.z));
 
         for (var j = 0; j < message.length; j++) {
-            message[j] ^= (multiplier[(j % 2) + 1] * (j + 1));
+            message[j] = Math.abs((message[j] ^ (multiplier[(j % 2) + 1] * (j + 1))) % 128);
         }
 
         return difficulty == 1 ? message : this.bounceMessage(message, this.calcNextPoint(p, v),
@@ -38,33 +40,79 @@ class SphereCryptor {
     }
 }
 
-class Encyptor extends SphereCryptor {
+class Encryptor extends SphereCryptor {
     static encrypt(message, difficulty) {
         var messageBytes = ByteUtilities.toMessageBytes(message.trim());
+        console.log(messageBytes);
 
-        var p = new Point(Math.random(), Math.random(), Math.random());
+        var p = new Point(Math.random(), Math.random(), Math.random()).normalize();
         var v = new Vector(-Math.random(), -Math.random(), -Math.random());
 
         messageBytes = this.bounceMessage(messageBytes, p, v, difficulty);
+        console.log("Encrypted Point: ", p.x, p.y, p.z);
+        console.log("Encrypted Vector: ", v.a, v.b, v.c);
+        console.log("Encrypted message bytes: ", messageBytes);
 
         var finalMessage = "";
-        finalMessage += ByteUtilities.toHexString(ByteUtilities.toByteArray(p.x));
-        finalMessage += ByteUtilities.toHexString(ByteUtilities.toByteArray(p.y));
-        finalMessage += ByteUtilities.toHexString(ByteUtilities.toByteArray(p.z));
+        finalMessage += ByteUtilities.toHexStringFromDouble(round(p.x, 16));
+        finalMessage += ByteUtilities.toHexStringFromDouble(round(p.y, 16));
+        finalMessage += ByteUtilities.toHexStringFromDouble(round(p.z, 16));
 
-        finalMessage += ByteUtilities.toHexString(ByteUtilities.toByteArray(v.a));
-        finalMessage += ByteUtilities.toHexString(ByteUtilities.toByteArray(v.b));
-        finalMessage += ByteUtilities.toHexString(ByteUtilities.toByteArray(v.c));
+        finalMessage += ByteUtilities.toHexStringFromDouble(round(v.a, 16));
+        finalMessage += ByteUtilities.toHexStringFromDouble(round(v.b, 16));
+        finalMessage += ByteUtilities.toHexStringFromDouble(round(v.c, 16));
 
-        finalMessage += ByteUtilities.toHexString(ByteUtilities.toByteArray(difficulty).slice(0, 2));
-        finalMessage += ByteUtilities.toHexString(messageBytes);
+        finalMessage += ByteUtilities.toHexStringFromByteArray(ByteUtilities.toByteArray(difficulty).slice(0, 4));
+        finalMessage += ByteUtilities.toHexStringFromByteArray(messageBytes);
         return finalMessage;
     }
 }
 
 class Decryptor extends SphereCryptor {
     static decrypt(hexMessage) {
-        var messageBytes = ByteUtilities.parseHexString(hexMessage);
+        var hexMessageBytes = ByteUtilities.parseHexString(hexMessage);
+
+        var px = ByteUtilities.toDoubleFromByteArray([hexMessageBytes[0], hexMessageBytes[1]]);
+        var py = ByteUtilities.toDoubleFromByteArray([hexMessageBytes[2], hexMessageBytes[3]]);
+        var pz = ByteUtilities.toDoubleFromByteArray([hexMessageBytes[4], hexMessageBytes[5]]);
+        var p = new Point(px, py, pz);
+        console.log("Decrypted Point: ", px, py, pz);
+
+        var va = -ByteUtilities.toDoubleFromByteArray([hexMessageBytes[6], hexMessageBytes[7]]);
+        var vb = -ByteUtilities.toDoubleFromByteArray([hexMessageBytes[8], hexMessageBytes[9]]);
+        var vc = -ByteUtilities.toDoubleFromByteArray([hexMessageBytes[10], hexMessageBytes[11]]);
+        var v = new Vector(va, vb, vc);
+        console.log("Decrypted Vector: ", va, vb, vc);
+
+        var difficulty = ByteUtilities.toDoubleFromByteArray([hexMessageBytes[12], 0]);
+
+        this.calcNextPoint(p, v);
+        v = new Vector(-v.a, -v.b, -v.c);
+
+        let hexx = hexMessage.slice(104);
+        var messageBytes = this.hex2a(hexx);
+        console.log("Decrypted message bytes: ", messageBytes);
+        messageBytes = this.bounceMessage(messageBytes, p, v, difficulty);
+
+        function parseStringBytes(messageBytes) {
+            var message = "";
+            for (var i = 0; i < messageBytes.length; i++) {
+                message += String.fromCharCode(messageBytes[i]);
+            }
+            return message;
+        }
+
+        console.log("Final bytes: ", messageBytes);
+
+        return parseStringBytes(messageBytes);
+    }
+
+    static hex2a(hexx) {
+        var hex = hexx.toString();//force conversion
+        var str = '';
+        for (var i = 0; (i < hex.length && hex.substr(i, 2) !== '00'); i += 2)
+            str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+        return ByteUtilities.toMessageBytes(str);
     }
 }
 
@@ -87,10 +135,13 @@ class ByteUtilities{
         return Array.from(new Int8Array(buffer)).reverse();
     }
 
-    static toHexString(byteArray) {
-        return Array.from(byteArray, function(byte) {
-            return ('0' + (byte & 0xFF).toString(16)).slice(-2);
-        }).join('')
+    static toDoubleFromByteArray(byteArray) {
+        let a = byteArray[0];
+        let b = byteArray[1];
+        let e = (a >> 52 - 32 & 0x7ff) - 1023;
+
+        return (a & 0xfffff | 0x100000) / Math.pow(2,52-32) * Math.pow(2, e) +
+        b * 1.0 / Math.pow(2, 52) * Math.pow(2, e);
     }
 
     static parseHexString(str) {
@@ -102,6 +153,16 @@ class ByteUtilities{
         }
 
         return result;
+    }
+
+    static toHexStringFromByteArray(byteArray) {
+        return Array.from(byteArray, function(byte) {
+            return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+        }).join('')
+    }
+
+    static toHexStringFromDouble(value) {
+        return this.toHexStringFromByteArray(this.toByteArray(value));
     }
 }
 
