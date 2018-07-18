@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="sphere-crypt.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+<body style="font-family: sans-serif; color: white">
+
+<div>
+    <a onclick="centerTransition(document.getElementById('aboutDescription'))" style="animation-delay: 1.5s"
+       class="tab fadein"> about </a>
+    <a style="animation-delay: 2s" class="tab fadein"> projects </a>
+    <a style="animation-delay: 2.5s" class="tab fadein"> resume </a>
+    <a style="animation-delay: 3s" class="tab fadein"> github </a>
+    <a style="animation-delay: 3.5s" class="tab fadein"> linkedin </a>
+</div>
+
+<div id="center-texts">
+    <p class="name fadein" id="name"> Charles Dracos </p>
+    <span style="opacity: 0" class="paragraph" id="aboutDescription"> My name is
+    Charlie, and I am an aspiring software engineer/developer. I enjoy a wide variety of topics, spanning
+    from systems to game design. </span>
+</div>
+
+<script>
+    function centerTransition(newText) {
+        var centerTexts = document.getElementById("center-texts").children;
+        for(var text in centerTexts) {
+            if (text == newText) {
+                text.classList.remove("fadeout");
+                text.classList.add("fadein");
+            }
+            else {
+                text.classList.add("fadeout");
+                text.classList.remove("fadein");
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
