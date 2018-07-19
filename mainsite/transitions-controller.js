@@ -11,3 +11,10 @@ function aboutTransition() {
 
     personalPhoto.classList.add("fadein");
 }
+
+function projectTransition() {
+    var personalPhoto = document.getElementById("personalPhoto");
+
+    personalPhoto.classList.remove("fadein");
+    personalPhoto.classList.add("move-to-corner");
+}
