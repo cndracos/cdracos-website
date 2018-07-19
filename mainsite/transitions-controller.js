@@ -1,12 +1,82 @@
-let aboutClicked;
-let projectClicked;
+let isFirstTabClick = true;
+var projectClicked = 2;
 
-function resetPhotoOnclick() {
-    let currentPhoto = document.getElementById('photoParent').children[0];
-    currentPhoto.addEventListener('click', aboutFunction);
+document.getElementsByClassName('tab')[0].onclick = aboutFunction;
+
+function aboutFunction() {
+    let name = document.getElementById("name");
+    let aboutParagraph = document.getElementById("aboutDescription");
+    let personalPhoto = document.getElementById("personalPhoto");
+
+    if (isFirstTabClick) {
+        updateElement(name, (element) => element.style.opacity = '1', 'move-up');
+        updateElement(aboutParagraph, (element) => {}, 'fadein');
+        updateElement(personalPhoto, (element) => {}, 'fadein');
+
+        isFirstTabClick = false;
+    }
+    else if (projectClicked === 1) {
+        updateElement(name, loadNameStyles, 'fadein', ['fadeout', 'move-up-and-fadeout']);
+
+        updateElement(aboutParagraph, (element) => loadOpacity(element, window.getComputedStyle(element)),
+            'fadein', ['fadeout']);
+
+        updateElement(personalPhoto, (element) => {
+            loadPhotoStyles(element);
+            element.style.opacity = '1';
+        }, 'move-to-center', ['move-to-corner']);
+
+        projectClicked = 0;
+    }
+    resetPhotoOnClick();
 }
 
-function savePhotoCoordinates(personalPhoto) {
+document.getElementsByClassName('tab')[1].onclick = projectFunction;
+
+function projectFunction() {
+    let personalPhoto = document.getElementById("personalPhoto");
+    let name = document.getElementById('name');
+
+    if (isFirstTabClick) {
+        updateElement(personalPhoto, (element) => {
+            let photoStyle = element.style;
+            photoStyle.height = '60px';
+            photoStyle.top = '87.5%';
+            photoStyle.left = '95%';
+            photoStyle.marginLeft = '-30px';
+        }, 'fadein');
+
+        updateElement(name, loadNameStyles, 'move-up-and-fadeout', ['fadein']);
+
+        isFirstTabClick = false;
+    }
+    else if (projectClicked === 0 || projectClicked === 2) {
+        let aboutParagraph = document.getElementById("aboutDescription");
+
+        updateElement(name, loadNameStyles, 'fadeout', ['move-up', 'fadein']);
+
+        updateElement(aboutParagraph, (element) => loadOpacity(element, window.getComputedStyle(element)),
+            'fadeout', ['fadein']);
+
+        updateElement(personalPhoto, (element) => {
+            loadPhotoStyles(element);
+            element.style.opacity = '1';
+        }, 'move-to-corner', ['fadein', 'move-to-center']);
+    }
+    resetPhotoOnClick();
+    projectClicked = 1;
+};
+
+function updateElement(element, loadFunction, newClasses, oldClasses) {
+    loadFunction(element);
+    element.classList.add(newClasses);
+    if (oldClasses !== undefined) oldClasses.forEach(function (oldClass) {
+        element.classList.remove(oldClass);
+    });
+    refreshNode(element);
+}
+
+function loadPhotoStyles(personalPhoto) {
     let computedStyle = window.getComputedStyle(personalPhoto),
         marginLeft = computedStyle.getPropertyValue('margin-left'),
         height = computedStyle.getPropertyValue('height'),
@@ -18,16 +88,16 @@ function savePhotoCoordinates(personalPhoto) {
         personalPhoto.style.height = height,
         personalPhoto.style.top = top;
 
-    saveOpacity(personalPhoto, computedStyle);
+    loadOpacity(personalPhoto, computedStyle);
 }
 
-function saveNameCoordinate(name) {
+function loadNameStyles(name) {
     let computedStyle = window.getComputedStyle(name);
     name.style.marginTop = computedStyle.getPropertyValue('margin-top');
-    saveOpacity(name, computedStyle);
+    loadOpacity(name, computedStyle);
 }
 
-function saveOpacity(faded, computedStyle) {
+function loadOpacity(faded, computedStyle) {
     faded.style.opacity = computedStyle.getPropertyValue('opacity');
 }
 
@@ -37,83 +107,12 @@ function refreshNode(node) {
     elm.parentNode.replaceChild(clone, elm);
 }
 
-function aboutFunction() {
-    let name = document.getElementById("name");
-    let aboutParagraph = document.getElementById("aboutDescription");
-    let personalPhoto = document.getElementById("personalPhoto");
-
-    if (!aboutClicked) {
-        name.style.opacity = '1';
-        name.classList.add("move-up");
-
-        aboutParagraph.classList.add("fadein");
-
-        personalPhoto.classList.add("fadein");
-        aboutClicked = true;
-    }
-    else if (projectClicked) {
-        saveNameCoordinate(name);
-        name.classList.add('fadein');
-        name.classList.remove('fadeout');
-        refreshNode(name);
-
-        aboutParagraph.style.opacity = window.getComputedStyle(aboutParagraph).getPropertyValue('opacity');
-        aboutParagraph.classList.add('fadein');
-        aboutParagraph.classList.remove('fadeout');
-        refreshNode(aboutParagraph);
-
-        savePhotoCoordinates(personalPhoto);
-        personalPhoto.classList.add('move-to-center');
-        personalPhoto.classList.remove('move-to-corner');
-        refreshNode(personalPhoto);
-        resetPhotoOnclick();
-
-        projectClicked = false;
-    }
-};
-
-document.getElementsByClassName('tab')[0].onclick = aboutFunction;
-
-document.getElementsByClassName('tab')[1].onclick = function () {
-    let personalPhoto = document.getElementById("personalPhoto");
-    if (!aboutClicked) {
-        let photoStyle = personalPhoto.style;
-        photoStyle.height = '60px';
-        photoStyle.top = '87.5%';
-        photoStyle.left = '95%';
-        photoStyle.marginLeft = '-30px';
-
-        personalPhoto.classList.add("fadein");
-        refreshNode(personalPhoto);
-        resetPhotoOnclick();
-
-        let name = document.getElementById('name');
-        saveNameCoordinate(name);
-        name.classList.remove('move-up', 'fadein');
-        name.classList.add('fadeout');
-        refreshNode(name);
-    }
-    else if (!projectClicked) {
-        let name = document.getElementById("name");
-        let aboutParagraph = document.getElementById("aboutDescription");
-
-        saveNameCoordinate(name);
-        name.classList.remove('move-up', 'fadein');
-        name.classList.add('fadeout');
-        refreshNode(name);
-
-        aboutParagraph.style.opacity = window.getComputedStyle(aboutParagraph).getPropertyValue('opacity');
-        aboutParagraph.classList.add('fadeout');
-        aboutParagraph.classList.remove('fadein');
-        refreshNode(aboutParagraph);
-
-        savePhotoCoordinates(personalPhoto);
-        personalPhoto.style.opacity = '1';
-        personalPhoto.classList.remove("fadein", 'move-to-center');
-        personalPhoto.classList.add("move-to-corner");
-        refreshNode(personalPhoto);
-        resetPhotoOnclick();
-
-        projectClicked = true;
-    }
-};
+function resetPhotoOnClick() {
+    let currentPhoto = document.getElementById('photoParent').children[0];
+    currentPhoto.addEventListener('click', () => {
+        if (projectClicked !== 1) {
+            projectFunction();
+        }
+        else aboutFunction();
+    });
+}
