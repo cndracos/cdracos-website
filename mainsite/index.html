@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <script src="transitions-controller.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="transitions-controller.js" defer></script>
+
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" type="text/css" href="animations.css">
 
@@ -12,9 +14,8 @@
 <body style="font-family: sans-serif; color: white">
 
 <div>
-    <a onclick="aboutTransition()" style="animation-delay: 1.5s"
-       class="tab fadein"> about </a>
-    <a onclick="projectTransition()" style="animation-delay: 2s" class="tab fadein"> projects </a>
+    <a style="animation-delay: 1.5s" class='tab fadein'> about </a>
+    <a style="animation-delay: 2s" class="tab fadein"> projects </a>
     <a href=images/Dracos_Charles.pdf target="_blank" style="animation-delay: 2.5s" class="tab fadein"> resume </a>
     <a href="https://github.com/cndracos" target="_blank" style="animation-delay: 3s" class="tab fadein"> github </a>
     <a style="animation-delay: 3.5s" class="tab fadein"> linkedin </a>
@@ -24,12 +25,12 @@
     <p class="name fadein" id="name"> Charles Dracos </p>
 </div>
 
-<div>
-    <img src="images/englandVictory.png" alt="Picture of me!" class="pic" id="personalPhoto">
+<div id="photoParent">
+    <img src="images/englandVictory.png" alt="Picture of me!" style="opacity: 0;" class="pic" id="personalPhoto">
 </div>
 
 <div>
-    <p class="paragraph" id="aboutDescription"> My name is
+    <p style="opacity: 0" class="paragraph" id="aboutDescription"> My name is
     Charlie, and I am an aspiring software engineer. I enjoy a wide variety of topics, spanning
     from network systems to game design. I like adding personal extensions to existing projects,
         such as adding a rotating light source to a simulated 3D beach ball, as well as creating my own:

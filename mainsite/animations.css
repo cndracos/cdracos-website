@@ -1,23 +1,23 @@
 .fadein {
-    -webkit-animation: fadein 5s forwards; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 5s forwards; /* Firefox < 16 */
-    animation: fadein 5s forwards;
+    -webkit-animation: fadein 4s forwards; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 4s forwards; /* Firefox < 16 */
+    animation: fadein 4s forwards;
 }
 
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
+     from { this: opacity; }
+     to   { opacity: 1; }
+ }
 
 /* Firefox < 16 */
 @-moz-keyframes fadein {
-    from { opacity: 0; }
+    from { this: opacity; }
     to   { opacity: 1; }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadein {
-    from { opacity: 0; }
+    from { this: opacity; }
     to   { opacity: 1; }
 }
 
@@ -28,19 +28,19 @@
 }
 
 @keyframes fadeout {
-    from { opacity: 1; }
+    from { this: opacity; }
     to   { opacity: 0; }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes fadeout {
-    from { opacity: 1; }
+    from { this: opacity; }
     to   { opacity: 0; }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadeout {
-    from { opacity: 1; }
+    from { this: opacity; }
     to   { opacity: 0; }
 }
 
@@ -52,83 +52,132 @@
 
 @keyframes move-up {
     from {
-        margin: -50px 0 0 -250px;
+        this: margin-top;
     }
     to {
-        margin: -100px 0 0 -250px;
+        margin-top: -20px;
     }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes move-up {
-    from {
-        margin: -50px 0 0 -250px;
-    }
     to {
-        margin: -100px 0 0 -250px;
+        margin-top: -20px;
     }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes move-up {
     from {
-        margin: -50px 0 0 -250px;
+        this: margin-top;
     }
-
     to {
-        margin: -100px 0 0 -250px;
+        margin-top: -20px;
     }
 }
 
 .move-to-corner {
-    -webkit-animation: move-to-corner 4s forwards; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: move-to-corner 4s forwards; /* Firefox < 16 */
-    animation: move-to-corner 4s forwards;
+    -webkit-animation: move-to-corner 4s ease-out forwards; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: move-to-corner 4s ease-out forwards; /* Firefox < 16 */
+    animation: move-to-corner 4s ease-out forwards;
 }
 
 @keyframes move-to-corner {
-    from {
-        opacity: 1;
-        width: 105px;
-        height: 105px;
-        margin: -185px 0 0 -57.5px;
-    }
-    to {
-        opacity: 1;
-        width: 75px;
-        height: 75px;
-        margin: 20% 0 0 40%;
-    }
-}
+     from {
+         this: height;
+         this: top;
+         this: left;
+         this: margin-left;
+     }
+     to {
+         height: 60px;
+         top: 87.5%;
+         left: 95%;
+         margin-left: -30px;
+     }
+ }
 
 /* Firefox < 16 */
 @-moz-keyframes move-to-corner {
     from {
-        opacity: 1;
-        width: 105px;
-        height: 105px;
-        margin: -185px 0 0 -57.5px;
+        this: height;
+        this: top;
+        this: left;
+        this: margin-left;
     }
     to {
-        opacity: 1;
-        width: 75px;
-        height: 75px;
-        margin: 20% 0 0 40%;
+        height: 60px;
+        top: 87.5%;
+        left: 95%;
+        margin-left: -30px;
     }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes move-to-corner {
     from {
-        opacity: 1;
-        width: 105px;
-        height: 105px;
-        margin: -185px 0 0 -37.5px;
+        this: height;
+        this: top;
+        this: left;
+        this: margin-left;
     }
     to {
-        opacity: 1;
-        width: 75px;
-        height: 75px;
-        margin: 20% 0 0 40%;
+        height: 60px;
+        top: 87.5%;
+        left: 95%;
+        margin-left: -30px;
+    }
+}
+
+.move-to-center {
+    -webkit-animation: move-to-center 4s ease-out forwards; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: move-to-center 4s ease-out forwards; /* Firefox < 16 */
+    animation: move-to-center 4s ease-out forwards;
+}
+
+@keyframes move-to-center {
+    from {
+        this: height;
+        this: top;
+        this: left;
+        this: margin-left;
+    }
+    to {
+        height: 100px;
+        top: 20%;
+        left: 50%;
+        margin-left: -50px;
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes move-to-center {
+    from {
+        this: height;
+        this: top;
+        this: left;
+        this: margin-left;
+    }
+    to {
+        height: 100px;
+        top: 20%;
+        left: 50%;
+        margin-left: -50px;
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes move-to-center {
+    from {
+        this: height;
+        this: top;
+        this: left;
+        this: margin-left;
+    }
+    to {
+        height: 100px;
+        top: 20%;
+        left: 50%;
+        margin-left: -50px;
     }
 }
