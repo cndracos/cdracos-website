@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c4690d37-9246-47c8-8183-52b0f39fe6be" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainsite/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainsite/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainsite/sphere-crypt.js" beforeDir="false" afterPath="$PROJECT_DIR$/mainsite/sphere-crypt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainsite/sphere-test.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainsite/sphere-test.html" afterDir="false" />
-    </list>
+    <list default="true" id="c4690d37-9246-47c8-8183-52b0f39fe6be" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -200,16 +195,15 @@
       <workItem from="1531862188546" duration="11113000" />
       <workItem from="1531902207338" duration="6949000" />
       <workItem from="1531918946994" duration="9452000" />
-      <workItem from="1531928492474" duration="901000" />
+      <workItem from="1531928492474" duration="1141000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35512000" />
+    <option name="totallyTimeSpent" value="35752000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="42" width="1851" height="964" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16948229" />
       <window_info anchor="bottom" id="TODO" order="6" />
