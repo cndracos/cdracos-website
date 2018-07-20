@@ -26,6 +26,7 @@ function aboutFunction() {
             element.style.opacity = '1';
         }, 'move-to-center', ['move-to-corner']);
 
+        slideAboutResponse();
         projectClicked = 0;
     }
     resetPhotoOnClick();
@@ -47,6 +48,7 @@ function projectFunction() {
         }, 'fadein');
 
         updateElement(name, loadNameStyles, 'move-up-and-fadeout', ['fadein']);
+        updateElement(projects[clickIndex], () => rightButton().style.opacity = '1', 'move-center-and-fadein');
 
         isFirstTabClick = false;
     }
@@ -62,9 +64,11 @@ function projectFunction() {
             loadPhotoStyles(element);
             element.style.opacity = '1';
         }, 'move-to-corner', ['fadein', 'move-to-center']);
+
+        slideProjectResponse();
     }
-    resetPhotoOnClick();
     projectClicked = 1;
+    resetPhotoOnClick();
 };
 
 function updateElement(element, loadFunction, newClasses, oldClasses) {
@@ -109,10 +113,5 @@ function refreshNode(node) {
 
 function resetPhotoOnClick() {
     let currentPhoto = document.getElementById('photoParent').children[0];
-    currentPhoto.addEventListener('click', () => {
-        if (projectClicked !== 1) {
-            projectFunction();
-        }
-        else aboutFunction();
-    });
+    currentPhoto.addEventListener('click', projectClicked!==1 ? projectFunction : aboutFunction);
 }

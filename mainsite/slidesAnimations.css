@@ -1,0 +1,89 @@
+/*#region move-left-and-fadeout*/
+.move-left-and-fadeout {
+    -webkit-animation: move-left 2s ease forwards, fadeout 2s ease forwards; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: move-left 2s ease forwards, fadeout 2s ease forwards; /* Firefox < 16 */
+    animation: move-left 2s ease forwards, fadeout 2s ease forwards;
+}
+
+@keyframes move-left {
+    to {
+        left: 5%;
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes move-left {
+    to {
+        left: 5%;
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes move-left {
+    to {
+        left: 5%;
+    }
+}
+/*#endregion*/
+
+/*#region move-right-and-fadeout*/
+.move-right-and-fadeout {
+    -webkit-animation: move-right 2s ease forwards, fadeout 2s ease forwards; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: move-right 2s ease forwards, fadeout 2s ease forwards; /* Firefox < 16 */
+    animation: move-right 2s ease forwards, fadeout 2s ease forwards;
+}
+
+@keyframes move-right {
+    to {
+        left: 45%;
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes move-right {
+    to {
+        left: 45%;
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes move-right {
+    to {
+        left: 45%;
+    }
+}
+/*#endregion*/
+
+/*#region move-center-and-fadeout/fadein*/
+.move-center-and-fadeout {
+    -webkit-animation: move-center 2s ease-out forwards, fadeout 2s ease forwards; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: move-center 2s ease-out forwards, fadeout 2s ease forwards; /* Firefox < 16 */
+    animation: move-center 2s ease-out forwards, fadeout 2s ease forwards;
+}
+
+.move-center-and-fadein {
+    -webkit-animation: move-center 2s ease forwards, fadein 2s ease forwards; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: move-center 2s ease forwards, fadein 2s ease forwards; /* Firefox < 16 */
+    animation: move-center 2s ease forwards, fadein 2s ease forwards;
+}
+
+@keyframes move-center {
+    to {
+        left: 25%;
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes move-center {
+    to {
+        left: 25%;
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes move-center{
+    to {
+        left: 25%;
+    }
+}
+/*#endregion*/

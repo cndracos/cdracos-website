@@ -64,3 +64,61 @@ html {
     left: 50%;
     margin-left: -50px;
 }
+
+/*#region arrows*/
+.fa {
+    position: absolute;
+    top: 50%;
+    margin: -18px 0 0 -18px;
+    z-index: 20;
+
+    color: gray;
+    opacity: .7;
+}
+
+.fa-chevron-left:hover {
+    text-shadow: -6px 0 #ffebde, 0 6px #fff0e6, 6px 0 #fff5ee, 0 -6px #fff0e6;
+}
+
+.fa-chevron-right:hover {
+    text-shadow: -6px 0 #fff5ee, 0 6px #fff0e6, 6px 0 #ffebde, 0 -6px #fff0e6;
+}
+/*#endregion*/
+
+div.projectSlide {
+    opacity: 0;
+    position: absolute;
+    top: 25%;
+    width: 50%;
+    height: 50%;
+}
+
+img.slideImage {
+    position: relative;
+    border: darkgray;
+    z-index: 8;
+    height: 60%;
+    width: 30%;
+    top: 20%;
+    left: 10%;
+}
+
+h3.slideHeader {
+    z-index: 11;
+    position: relative;
+    height: 10%;
+    width: 50%;
+    top: 20%;
+    float: right;
+}
+
+p.slideDescription {
+    font-size: 12px;
+
+    z-index: 11;
+    position: relative;
+    height: 40%;
+    width: 50%;
+    top: -30%;
+    float: right;
+}

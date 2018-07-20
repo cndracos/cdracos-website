@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>C. Dracos</title>
 
-    <script src="transitions-controller.js" defer></script>
-
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" type="text/css" href="animations.css">
+    <link rel="stylesheet" type="text/css" href="tabTransitions.css">
+    <link rel="stylesheet" type="text/css" href="slidesAnimations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style type="text/css">
         body {
             font-family: sans-serif;
@@ -30,15 +31,41 @@
 
 <div id="photoParent">
     <img src="images/englandVictory.png" alt="Picture of me!" id="personalPhoto">
-</div>
 
-<div>
     <p id="aboutDescription"> My name is
         Charlie, and I am an aspiring software engineer. I enjoy a wide variety of topics, spanning
         from network systems to game design. I like adding personal extensions to existing projects,
         such as adding a rotating light source to a simulated 3D beach ball, as well as creating my own:
         from small linear sequence predictor scripts to custom made sphere-based cryptography. </p>
 </div>
+
+<div>
+    <i style="left: 20%; opacity: 0; font-size: 36px;" class="fa fa-chevron-left"> </i>
+    <i style="left: 80%; opacity: 0; font-size: 36px;" class="fa fa-chevron-right"> </i>
+</div>
+
+<div id="projectsContainer">
+    <div style="left: 25%;" class="projectSlide" id="voogasalad">
+        <img class="slideImage" src="images/englandVictory.png" alt="projectPlaceholderImage"/>
+        <<h3 class="slideHeader"> VoogaSalad </h3>
+        <p class="slideDescription">This will be an example of a project image / description combination</p>
+    </div>
+
+    <div style="left: 45%;" class="projectSlide" id="slogo">
+        <img class="slideImage" src="images/mountains.jpg" alt="slogoPlaceholderImage"/>
+        <h3 class="slideHeader"> SLogo </h3>
+        <p class="slideDescription">Now we are looking at a completely different example than before</p>
+    </div>
+
+    <div style="left: 45%;" class="projectSlide" id="puppies">
+        <img class="slideImage" src="images/puppers.jpg" alt="puppyPlaceholderImage"/>
+        <h3 class="slideHeader"> Puppies </h3>
+        <p class="slideDescription">Last but not least we have ourselves a lovely image of some puppies</p>
+    </div>
+</div>
+
+<script src="tabController.js"></script>
+<script src="projectSlideTransitions.js"></script>
 
 </body>
 </html>

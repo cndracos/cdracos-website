@@ -28,7 +28,7 @@
 /*#endregion*/
 
 /*#region fadeout*/
-p.fadeout {
+.fadeout {
     -webkit-animation: fadeout 2s forwards; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadeout 2s forwards; /* Firefox < 16 */
     animation: fadeout 2s forwards;
@@ -56,11 +56,13 @@ p.fadeout {
 
 /*#endregion*/
 
+/*#region move-up-and-fadeout*/
 p.move-up-and-fadeout {
     -webkit-animation: move-up 2s ease forwards, fadeout 2s forwards; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: move-up 2s ease forwards, fadeout 2s forwards; /* Firefox < 16 */
     animation: move-up 2s ease forwards, fadeout 2s forwards;
 }
+/*#endregion*/
 
 /*#region move-up*/
 p.move-up {
