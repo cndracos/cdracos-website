@@ -95,9 +95,9 @@ p.move-up {
 
 /*#region move-to-corner*/
 img.move-to-corner {
-    -webkit-animation: move-to-corner 4s ease-out forwards; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: move-to-corner 4s ease-out forwards; /* Firefox < 16 */
-    animation: move-to-corner 4s ease-out forwards;
+    -webkit-animation: move-to-corner 3s ease-out forwards; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: move-to-corner 3s ease-out forwards; /* Firefox < 16 */
+    animation: move-to-corner 3s ease-out forwards;
 }
 
 @keyframes move-to-corner {
@@ -133,9 +133,9 @@ img.move-to-corner {
 
 /*#region move-to-center*/
 img.move-to-center {
-    -webkit-animation: move-to-center 4s ease-out forwards; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: move-to-center 4s ease-out forwards; /* Firefox < 16 */
-    animation: move-to-center 4s ease-out forwards;
+    -webkit-animation: move-to-center 3s ease-out forwards; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: move-to-center 3s ease-out forwards; /* Firefox < 16 */
+    animation: move-to-center 3s ease-out forwards;
 }
 
 @keyframes move-to-center {

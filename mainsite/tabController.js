@@ -1,5 +1,5 @@
 let isFirstTabClick = true;
-var projectClicked = 2;
+var projectClicked;
 
 document.getElementsByClassName('tab')[0].onclick = aboutFunction;
 
@@ -15,20 +15,18 @@ function aboutFunction() {
 
         isFirstTabClick = false;
     }
-    else if (projectClicked === 1) {
+    else if (projectClicked) {
         updateElement(name, loadNameStyles, 'fadein', ['fadeout', 'move-up-and-fadeout']);
-
         updateElement(aboutParagraph, (element) => loadOpacity(element, window.getComputedStyle(element)),
             'fadein', ['fadeout']);
-
         updateElement(personalPhoto, (element) => {
             loadPhotoStyles(element);
             element.style.opacity = '1';
         }, 'move-to-center', ['move-to-corner']);
 
         slideAboutResponse();
-        projectClicked = 0;
     }
+    projectClicked = false;
     resetPhotoOnClick();
 }
 
@@ -46,29 +44,25 @@ function projectFunction() {
             photoStyle.left = '95%';
             photoStyle.marginLeft = '-30px';
         }, 'fadein');
-
         updateElement(name, loadNameStyles, 'move-up-and-fadeout', ['fadein']);
-        updateElement(projects[clickIndex], () => rightButton().style.opacity = '1', 'move-center-and-fadein');
 
         isFirstTabClick = false;
     }
-    else if (projectClicked === 0 || projectClicked === 2) {
+    else if (!projectClicked) {
         let aboutParagraph = document.getElementById("aboutDescription");
 
         updateElement(name, loadNameStyles, 'fadeout', ['move-up', 'fadein']);
-
         updateElement(aboutParagraph, (element) => loadOpacity(element, window.getComputedStyle(element)),
             'fadeout', ['fadein']);
-
         updateElement(personalPhoto, (element) => {
             loadPhotoStyles(element);
             element.style.opacity = '1';
         }, 'move-to-corner', ['fadein', 'move-to-center']);
 
-        slideProjectResponse();
     }
-    projectClicked = 1;
+    projectClicked = true;
     resetPhotoOnClick();
+    slideProjectResponse();
 };
 
 function updateElement(element, loadFunction, newClasses, oldClasses) {
@@ -81,16 +75,12 @@ function updateElement(element, loadFunction, newClasses, oldClasses) {
 }
 
 function loadPhotoStyles(personalPhoto) {
-    let computedStyle = window.getComputedStyle(personalPhoto),
-        marginLeft = computedStyle.getPropertyValue('margin-left'),
-        height = computedStyle.getPropertyValue('height'),
-        top = computedStyle.getPropertyValue('top'),
-        left = computedStyle.getPropertyValue('left');
+    let computedStyle = window.getComputedStyle(personalPhoto);
 
-    personalPhoto.style.left = left,
-        personalPhoto.style.marginLeft = marginLeft,
-        personalPhoto.style.height = height,
-        personalPhoto.style.top = top;
+    personalPhoto.style.left = computedStyle.getPropertyValue('left'),
+        personalPhoto.style.marginLeft = computedStyle.getPropertyValue('margin-left'),
+        personalPhoto.style.height = computedStyle.getPropertyValue('height'),
+        personalPhoto.style.top = computedStyle.getPropertyValue('top');
 
     loadOpacity(personalPhoto, computedStyle);
 }
@@ -113,5 +103,5 @@ function refreshNode(node) {
 
 function resetPhotoOnClick() {
     let currentPhoto = document.getElementById('photoParent').children[0];
-    currentPhoto.addEventListener('click', projectClicked!==1 ? projectFunction : aboutFunction);
+    currentPhoto.addEventListener('click', projectClicked ? aboutFunction : projectFunction);
 }
