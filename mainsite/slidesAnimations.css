@@ -7,21 +7,21 @@
 
 @keyframes move-left {
     to {
-        left: 5%;
+        left: -12.5%;
     }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes move-left {
     to {
-        left: 5%;
+        left: -12.5%;
     }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes move-left {
     to {
-        left: 5%;
+        left: -12.5%;
     }
 }
 /*#endregion*/
@@ -35,21 +35,21 @@
 
 @keyframes move-right {
     to {
-        left: 45%;
+        left: 37.5%;
     }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes move-right {
     to {
-        left: 45%;
+        left: 37.5%;
     }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes move-right {
     to {
-        left: 45%;
+        left: 37.5%;
     }
 }
 /*#endregion*/
@@ -69,21 +69,21 @@
 
 @keyframes move-center {
     to {
-        left: 25%;
+        left: 12.5%;
     }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes move-center {
     to {
-        left: 25%;
+        left: 12.5%;
     }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes move-center{
     to {
-        left: 25%;
+        left: 12.5%;
     }
 }
 /*#endregion*/

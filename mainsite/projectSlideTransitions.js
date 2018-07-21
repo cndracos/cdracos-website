@@ -1,4 +1,5 @@
 let clickIndex = 0;
+let projectTabResponded;
 let projects = document.getElementById("projectsContainer").children;
 
 function rightButton() {
@@ -45,16 +46,20 @@ function loadSlide(slide) {
 
 function slideAboutResponse() {
     updateSlide('move-center-and-fadeout', ['move-center-and-fadein']);
+    projectTabResponded = false;
 
     hideButton(rightButton);
     hideButton(leftButton);
 }
 
 function slideProjectResponse() {
-    updateSlide('move-center-and-fadein', ['move-center-and-fadeout']);
+    if (!projectTabResponded) {
+        updateSlide('move-center-and-fadein', ['move-center-and-fadeout']);
+        projectTabResponded = true;
 
-    checkButtonShowing(leftButton, false);
-    checkButtonShowing(rightButton, true);
+        checkButtonShowing(leftButton, false);
+        checkButtonShowing(rightButton, true);
+    }
 }
 
 function hideButton(buttonFunc) {
