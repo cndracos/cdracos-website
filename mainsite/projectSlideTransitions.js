@@ -1,37 +1,41 @@
 let clickIndex = 0;
-let projectTabResponded;
 let projects = document.getElementById("projectsContainer").children;
+
+rightButton().addEventListener('click', () => {
+    if (rightIndexInBounds() && projectClicked) rightFunction();
+});
+leftButton().addEventListener('click', () => {
+    if (leftIndexInBounds() && projectClicked) leftFunction();
+});
 
 function rightButton() {
     return document.getElementsByClassName('fa-chevron-right')[0];
 }
-rightButton().addEventListener('click', rightFunction);
 
 function leftButton() {
     return document.getElementsByClassName('fa-chevron-left')[0];
 }
-leftButton().addEventListener('click', leftFunction);
+
+function rightIndexInBounds() {
+    return clickIndex !== projects.length - 1;
+}
+
+function leftIndexInBounds() {
+    return clickIndex !== 0;
+}
 
 function rightFunction() {
-    if (clickIndex < projects.length - 1 && projectClicked) {
-        updateSlide('move-left-and-fadeout', ['move-center-and-fadein']);
-        clickIndex++;
-        updateSlide('move-center-and-fadein', ['move-right-and-fadeout']);
-
-        checkButtonShowing(leftButton, false);
-        checkButtonShowing(rightButton, true);
-    }
+    updateSlide('move-left-and-fadeout', ['move-center-and-fadein']);
+    clickIndex++;
+    updateSlide('move-center-and-fadein', ['move-right-and-fadeout']);
+    checkButtonVisibility();
 }
 
 function leftFunction() {
-    if (clickIndex > 0 && projectClicked) {
-        updateSlide('move-right-and-fadeout', ['move-center-and-fadein']);
-        clickIndex--;
-        updateSlide('move-center-and-fadein', ['move-left-and-fadeout']);
-
-        checkButtonShowing(rightButton, true);
-        checkButtonShowing(leftButton, false);
-    }
+    updateSlide('move-right-and-fadeout', ['move-center-and-fadein']);
+    clickIndex--;
+    updateSlide('move-center-and-fadein', ['move-left-and-fadeout']);
+    checkButtonVisibility();
 }
 
 function updateSlide(newClass, oldClasses) {
@@ -44,36 +48,34 @@ function loadSlide(slide) {
     loadOpacity(slide, computedStyle);
 }
 
+function slideProjectResponse() {
+    updateSlide('move-center-and-fadein', ['move-center-and-fadeout']);
+    checkButtonVisibility()
+}
+
 function slideAboutResponse() {
     updateSlide('move-center-and-fadeout', ['move-center-and-fadein']);
-    projectTabResponded = false;
-
-    hideButton(rightButton);
-    hideButton(leftButton);
+    hideButton(rightButton());
+    hideButton(leftButton());
 }
 
-function slideProjectResponse() {
-    if (!projectTabResponded) {
-        updateSlide('move-center-and-fadein', ['move-center-and-fadeout']);
-        projectTabResponded = true;
-
-        checkButtonShowing(leftButton, false);
-        checkButtonShowing(rightButton, true);
-    }
+function checkButtonVisibility() {
+    checkButtonShowing(leftButton, leftIndexInBounds(), leftFunction);
+    checkButtonShowing(rightButton, rightIndexInBounds(), rightFunction);
 }
 
-function hideButton(buttonFunc) {
-    updateElement(buttonFunc(), (element) => loadOpacity(element, window.getComputedStyle(element)),
-        'fadeout', ['fadein']);
-}
-
-function checkButtonShowing(buttonFunc, isRight) {
-    if (isRight ? clickIndex === projects.length - 1 : clickIndex === 0) {
-        hideButton(buttonFunc);
+function checkButtonShowing(buttonFunc, indexCheck, onClickFunc) {
+    if (!indexCheck) {
+        hideButton(buttonFunc());
     }
     else {
         updateElement(buttonFunc(), (element) => loadOpacity(element, window.getComputedStyle(element)),
             'fadein', ['fadeout']);
     }
-    buttonFunc().addEventListener('click', isRight ? rightFunction : leftFunction);
+    buttonFunc().addEventListener('click', onClickFunc);
+}
+
+function hideButton(button) {
+    updateElement(button, (element) => loadOpacity(element, window.getComputedStyle(element)),
+        'fadeout', ['fadein']);
 }

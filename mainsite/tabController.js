@@ -2,61 +2,66 @@ var projectClicked;
 let aboutTab = document.getElementsByClassName('tab')[0];
 let projectTab = document.getElementsByClassName('tab')[1];
 
-aboutTab.onclick = () => firstClickFunction(true);
-projectTab.onclick = () => firstClickFunction(false);
+aboutTab.onclick = aboutFirstClicked;
+projectTab.onclick = projectFirstClicked;
 
-function firstClickFunction(aboutTabClicked) {
+function aboutFirstClicked() {
+    let personalPhoto = document.getElementById("personalPhoto");
+    let name = document.getElementById("name");
+    let aboutParagraph = document.getElementById("aboutDescription");
+
+    updateElement(name, (element) => element.style.opacity = '1', 'move-up');
+    updateElement(aboutParagraph, (element) => {}, 'fadein');
+    updateElement(personalPhoto, (element) => {}, 'fadein');
+
+    resetClickListeners();
+}
+
+function projectFirstClicked(aboutTabClicked) {
     let personalPhoto = document.getElementById("personalPhoto");
 
-    if (aboutTabClicked) {
-        let name = document.getElementById("name");
-        let aboutParagraph = document.getElementById("aboutDescription");
+    updateElement(personalPhoto, (element) => {
+        let photoStyle = element.style;
+        photoStyle.height = '60px';
+        photoStyle.top = '87.5%';
+        photoStyle.left = '95%';
+        photoStyle.marginLeft = '-30px';
+    }, 'fadein');
+    updateName('move-up-and-fadeout', ['fadein']);
 
-        updateElement(name, (element) => element.style.opacity = '1', 'move-up');
-        updateElement(aboutParagraph, (element) => {}, 'fadein');
-        updateElement(personalPhoto, (element) => {}, 'fadein');
-    }
-    else {
-        updateElement(personalPhoto, (element) => {
-            let photoStyle = element.style;
-            photoStyle.height = '60px';
-            photoStyle.top = '87.5%';
-            photoStyle.left = '95%';
-            photoStyle.marginLeft = '-30px';
-        }, 'fadein');
-        updateName('move-up-and-fadeout', ['fadein']);
+    projectClicked = true;
+    slideProjectResponse();
+    resetClickListeners();
+}
 
-        projectClicked = true;
-        slideProjectResponse();
-    }
-
+function resetClickListeners() {
     resetPhotoOnClick();
-    aboutTab.onclick = aboutFunction;
-    projectTab.onclick = projectFunction;
+    aboutTab.onclick = () => {
+        if(projectClicked) aboutFunction()
+    };
+    projectTab.onclick = () => {
+        if(!projectClicked) projectFunction()
+    };
 }
 
 function aboutFunction() {
-    if (projectClicked) {
-        updateName('fadein', ['fadeout', 'move-up-and-fadeout']);
-        updateAboutParagraph('fadein', ['fadeout']);
-        updatePhoto('move-to-center', ['move-to-corner']);
+    updateName('fadein', ['fadeout', 'move-up-and-fadeout']);
+    updateAboutParagraph('fadein', ['fadeout']);
+    updatePhoto('move-to-center', ['move-to-corner']);
 
-        projectClicked = false;
-        resetPhotoOnClick();
-        slideAboutResponse();
-    }
+    projectClicked = false;
+    resetPhotoOnClick();
+    slideAboutResponse();
 }
 
 function projectFunction() {
-    if (!projectClicked) {
-        updateName('fadeout', ['move-up', 'fadein']);
-        updateAboutParagraph('fadeout', ['fadein']);
-        updatePhoto('move-to-corner', ['fadein', 'move-to-center']);
+    updateName('fadeout', ['move-up', 'fadein']);
+    updateAboutParagraph('fadeout', ['fadein']);
+    updatePhoto('move-to-corner', ['fadein', 'move-to-center']);
 
-        projectClicked = true;
-        resetPhotoOnClick();
-        slideProjectResponse();
-    }
+    projectClicked = true;
+    resetPhotoOnClick();
+    slideProjectResponse();
 };
 
 function updateName(newClass, oldClasses) {
