@@ -1,42 +1,22 @@
-let isFirstTabClick = true;
 var projectClicked;
+let aboutTab = document.getElementsByClassName('tab')[0];
+let projectTab = document.getElementsByClassName('tab')[1];
 
-document.getElementsByClassName('tab')[0].onclick = aboutFunction;
+aboutTab.onclick = () => firstClickFunction(true);
+projectTab.onclick = () => firstClickFunction(false);
 
-function aboutFunction() {
-    let name = document.getElementById("name");
-    let aboutParagraph = document.getElementById("aboutDescription");
+function firstClickFunction(aboutTabClicked) {
     let personalPhoto = document.getElementById("personalPhoto");
 
-    if (isFirstTabClick) {
+    if (aboutTabClicked) {
+        let name = document.getElementById("name");
+        let aboutParagraph = document.getElementById("aboutDescription");
+
         updateElement(name, (element) => element.style.opacity = '1', 'move-up');
         updateElement(aboutParagraph, (element) => {}, 'fadein');
         updateElement(personalPhoto, (element) => {}, 'fadein');
-
-        isFirstTabClick = false;
     }
-    else if (projectClicked) {
-        updateElement(name, loadNameStyles, 'fadein', ['fadeout', 'move-up-and-fadeout']);
-        updateElement(aboutParagraph, (element) => loadOpacity(element, window.getComputedStyle(element)),
-            'fadein', ['fadeout']);
-        updateElement(personalPhoto, (element) => {
-            loadPhotoStyles(element);
-            element.style.opacity = '1';
-        }, 'move-to-center', ['move-to-corner']);
-
-        slideAboutResponse();
-    }
-    projectClicked = false;
-    resetPhotoOnClick();
-}
-
-document.getElementsByClassName('tab')[1].onclick = projectFunction;
-
-function projectFunction() {
-    let personalPhoto = document.getElementById("personalPhoto");
-    let name = document.getElementById('name');
-
-    if (isFirstTabClick) {
+    else {
         updateElement(personalPhoto, (element) => {
             let photoStyle = element.style;
             photoStyle.height = '60px';
@@ -44,26 +24,59 @@ function projectFunction() {
             photoStyle.left = '95%';
             photoStyle.marginLeft = '-30px';
         }, 'fadein');
-        updateElement(name, loadNameStyles, 'move-up-and-fadeout', ['fadein']);
+        updateName('move-up-and-fadeout', ['fadein']);
 
-        isFirstTabClick = false;
+        projectClicked = true;
+        slideProjectResponse();
     }
-    else if (!projectClicked) {
-        let aboutParagraph = document.getElementById("aboutDescription");
 
-        updateElement(name, loadNameStyles, 'fadeout', ['move-up', 'fadein']);
-        updateElement(aboutParagraph, (element) => loadOpacity(element, window.getComputedStyle(element)),
-            'fadeout', ['fadein']);
-        updateElement(personalPhoto, (element) => {
-            loadPhotoStyles(element);
-            element.style.opacity = '1';
-        }, 'move-to-corner', ['fadein', 'move-to-center']);
-
-    }
-    projectClicked = true;
     resetPhotoOnClick();
-    slideProjectResponse();
+    aboutTab.onclick = aboutFunction;
+    projectTab.onclick = projectFunction;
+}
+
+function aboutFunction() {
+    if (projectClicked) {
+        updateName('fadein', ['fadeout', 'move-up-and-fadeout']);
+        updateAboutParagraph('fadein', ['fadeout']);
+        updatePhoto('move-to-center', ['move-to-corner']);
+
+        projectClicked = false;
+        resetPhotoOnClick();
+        slideAboutResponse();
+    }
+}
+
+function projectFunction() {
+    if (!projectClicked) {
+        updateName('fadeout', ['move-up', 'fadein']);
+        updateAboutParagraph('fadeout', ['fadein']);
+        updatePhoto('move-to-corner', ['fadein', 'move-to-center']);
+
+        projectClicked = true;
+        resetPhotoOnClick();
+        slideProjectResponse();
+    }
 };
+
+function updateName(newClass, oldClasses) {
+    let name = document.getElementById('name');
+    updateElement(name, loadNameStyles, newClass, oldClasses);
+}
+
+function updateAboutParagraph(newClass, oldClasses) {
+    let aboutParagraph = document.getElementById('aboutDescription');
+    updateElement(aboutParagraph, (element) => loadOpacity(element, window.getComputedStyle(element)),
+        newClass, oldClasses);
+}
+
+function updatePhoto(newClass, oldClasses) {
+    let personalPhoto = document.getElementById('personalPhoto');
+    updateElement(personalPhoto, (element) => {
+        loadPhotoStyles(element);
+        element.style.opacity = '1';
+    }, newClass, oldClasses);
+}
 
 function updateElement(element, loadFunction, newClasses, oldClasses) {
     loadFunction(element);
