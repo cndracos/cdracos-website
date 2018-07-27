@@ -73,21 +73,21 @@ p.move-up {
 
 @keyframes move-up {
     to {
-        margin-top: -20px;
+        margin-top: -8px;
     }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes move-up {
     to {
-        margin-top: -20px;
+        margin-top: -8px;
     }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes move-up {
     to {
-        margin-top: -20px;
+        margin-top: -8px;
     }
 }
 

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Charles Dracos</title>
 
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" type="text/css" href="tabTransitions.css">
-    <link rel="stylesheet" type="text/css" href="slidesAnimations.css">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/tabTransitions.css">
+    <link rel="stylesheet" type="text/css" href="styles/slidesAnimations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
@@ -16,8 +16,10 @@
     <nav>
         <a style="animation-delay: 1.5s" class='tab fadein'> about </a>
         <a style="animation-delay: 2.25s" class="tab fadein"> projects </a>
-        <a href=images/Dracos_Charles.pdf target="_blank" style="animation-delay: 3s" class="tab fadein"> resume </a>
-        <a href="https://github.com/cndracos" target="_blank" style="animation-delay: 3.75s" class="tab fadein"> github </a>
+        <a href=documents/Charles_Dracos_Resume.pdf target="_blank" style="animation-delay: 3s" class="tab fadein">
+            resume </a>
+        <a href="https://github.com/cndracos" target="_blank" style="animation-delay: 3.75s" class="tab fadein">
+            github </a>
         <!--<a style="animation-delay: 3.5s" class="tab fadein"> linkedin </a>-->
     </nav>
 
@@ -27,11 +29,10 @@
 <div id="photoParent">
     <img src="images/englandVictory.png" alt="Picture of me!" id="personalPhoto">
 
-    <p id="aboutDescription"> My name is
-        Charlie, and I am an aspiring software engineer. I enjoy a wide variety of topics, spanning
-        from network systems to game design. I like adding personal extensions to existing projects,
-        such as adding a rotating light source to a simulated 3D beach ball, as well as creating my own:
-        from small linear sequence predictor scripts to custom made sphere-based cryptography. </p>
+    <p id="aboutDescription"> I'm Charlie, a rising junior at Duke University studying Computer Science, Economics,
+        and Philosophy. I am a software engineer with a wide variety of interests -- from distributed systems
+        to game development. My goal is to constantly learn about new subjects and schools
+        of thought in order to continually develop my skills in technology.</p>
 </div>
 
 <div>
@@ -45,23 +46,24 @@
         <<h3 class="slideHeader"> voogasalad </h3>
         <p class="slideDescription"> Over the course of ten weeks, nine fellow
             students and I created a game authoring application. Four separate teams were created from the larger
-            group, and I was a member of the team which designed and coded our engine which would run the games made using
+            group, and I was a member of the team which designed and coded our engine which would run the games made
+            using
             our platform. Working on this project taught me how to work under the Agile methodology and effectively
             communicate with team members in order to construct a well-designed, flexible game environment.
             <br><br> Language: Java <br> Size: ~15,000 lines</p>
     </div>
 
     <div style="left: 37.5%;" class="projectSlide">
-        <img class="slideImage" src="images/doublepupper.jpg" alt="slogoPlaceholderImage"/>
+        <img class="slideImage" src="images/spherecrypt.gif" alt="slogoPlaceholderImage"/>
         <h3 class="slideHeader"> sphereCrypt </h3>
-        <p class="slideDescription"> sphereCrypt is a cryptography algorithm which I created, using a custom encryption /
-        decryption technique. The algorithm allows string messages to be encrypted to a hex string, which can
-        then be passed into the decryption scheme which will return the original message. The encryption is not
-        one-to-one, meaning that the same message may be encrypted in many different ways. Despite this, it can
+        <p class="slideDescription"> sphereCrypt is a cryptography algorithm which I created, using a custom encryption
+            /
+            decryption technique. The algorithm allows string messages to be encrypted to a hex string, which can
+            then be passed into the decryption scheme which will return the original message. The encryption is not
+            one-to-one, meaning that the same message may be encrypted in many different ways. Despite this, it can
             always be decrypted back into the original message.
-        <br><br> Language: Python <br> Size: 207 lines </p>
+            <br><br> Language: Python <br> Size: 207 lines </p>
 
-        <!--<p> sphereCrypt is a small cryptography program I wrote using a custom encryption / decryption scheme. </p>-->
     </div>
 
     <div style="left: 37.5%;" class="projectSlide">
@@ -70,14 +72,15 @@
         <p class="slideDescription"> The website you are currently viewing is made entirely from scratch, not using any
             format from a course or website as a template. I designed it to be as clean and smooth as possible for the
             user, while still making the experience intuitive for those unfamiliar with the site. The transition logic
-        was implemented to be flexible to support any sequence of actions and the animations made to seem natural regardless
-        of what is happening in the back-end.
-        <br><br> Languages: HTML, CSS, Javascript <br> Size: 649 lines </p>
+            was implemented to be flexible to support any sequence of actions and the animations made to seem natural
+            regardless
+            of what is happening in the back-end.
+            <br><br> Languages: HTML, CSS, Javascript <br> Size: 649 lines </p>
     </div>
 </div>
 
-<script src="tabController.js"></script>
-<script src="projectSlideTransitions.js"></script>
+<script src="scripts/tabController.js"></script>
+<script src="scripts/projectSlideTransitions.js"></script>
 
 </body>
 </html>

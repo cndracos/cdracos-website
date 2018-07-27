@@ -69,13 +69,19 @@ function checkButtonShowing(buttonFunc, indexCheck, onClickFunc) {
         hideButton(buttonFunc());
     }
     else {
-        updateElement(buttonFunc(), (element) => loadOpacity(element, window.getComputedStyle(element)),
-            'fadein', ['fadeout']);
+        updateElement(buttonFunc(), (element) => {
+                element.style.pointerEvents = 'auto';
+                loadOpacity(element, window.getComputedStyle(element))
+            },
+                'fadein', ['fadeout']);
     }
     buttonFunc().addEventListener('click', onClickFunc);
 }
 
 function hideButton(button) {
-    updateElement(button, (element) => loadOpacity(element, window.getComputedStyle(element)),
-        'fadeout', ['fadein']);
+    updateElement(button, (element) => {
+            element.style.pointerEvents = 'none';
+            loadOpacity(element, window.getComputedStyle(element))
+        },
+            'fadeout', ['fadein']);
 }
